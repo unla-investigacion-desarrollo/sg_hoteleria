@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+<class name="sgh.mansilla.modelo.datos.facturacion.ClienteComprobante" table="clientecomprobante">
+	<id column="idClienteComprobante" name="idClienteComprobante">
+		<generator class="identity"/>
+	</id>
+
+	<property column="nombre" name="nombre" type="string"/>
+	<property column="apellido" name="apellido" type="string"/>
+	<property column="razonSocial" name="razonSocial" type="string"/>
+	<property column="documento" name="documento" type="string"/>
+	<property column="domicilio" name="domicilio" type="string"/>
+	<property column="localidad" name="localidad" type="string"/>
+	<property column="mail" name="mail" type="string"/>
+	
+		
+	<many-to-one lazy="false" name="tipoDocumento" column="idTipoDocumento"
+		class="sgh.mansilla.modelo.datos.persona.TipoDocumento" not-null="true"/>
+		
+</class>
+</hibernate-mapping>

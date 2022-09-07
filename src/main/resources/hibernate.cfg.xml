@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD
+3.0//EN" "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+<!-- 		<property name="connection.driver_class">com.mysql.jdbc.Driver</property> -->
+<!-- 		<property name="connection.url">jdbc:mysql://localhost:3306/sgh</property> -->
+<!-- 		<property name="connection.username">root</property> -->
+<!-- 		<property name="connection.password">root</property> -->
+<!-- 		<property name="connection.pool_size">1</property> -->
+		<property name="dialect">org.hibernate.dialect.MySQLDialect</property>
+		<property name="show_sql">true</property> <!-- en true muestra hql en consola -->
+		<property name="hibernate.format_sql">true</property>
+		<!-- create create-drop validate update -->
+		<property name="hibernate.hbm2ddl.auto">update</property>
+
+		<!--Mapeo Entidades -->
+		<mapping resource="mapeos/tipoDocumento.hbm.xml" />
+		<mapping resource="mapeos/caracteristicaPasajero.hbm.xml" />
+		<mapping resource="mapeos/pasajero.hbm.xml" />
+		<mapping resource="mapeos/organizacion.hbm.xml" />
+
+		<mapping resource="mapeos/hotel.hbm.xml" />
+		<mapping resource="mapeos/tipoHabitacion.hbm.xml" />
+		<mapping resource="mapeos/caracteristicaHabitacion.hbm.xml" />
+		<mapping resource="mapeos/estadoHabitacion.hbm.xml" />
+		<mapping resource="mapeos/habitacion.hbm.xml" />
+		<mapping resource="mapeos/tipoServicio.hbm.xml" />
+		<mapping resource="mapeos/servicio.hbm.xml" />
+		<mapping resource="mapeos/planAlojamiento.hbm.xml" />
+
+		<mapping resource="mapeos/estadoEstadia.hbm.xml" />
+		<mapping resource="mapeos/estadia.hbm.xml" />
+
+		<mapping resource="mapeos/pasajeroEstadia.hbm.xml" />
+		
+		<mapping resource="mapeos/alicuota.hbm.xml" />
+		<mapping resource="mapeos/comprobante.hbm.xml" />
+		<mapping resource="mapeos/concepto.hbm.xml" />
+		<mapping resource="mapeos/conceptosAIncluir.hbm.xml" />
+		<mapping resource="mapeos/formaDePago.hbm.xml" />
+		<mapping resource="mapeos/moneda.hbm.xml" />
+		<mapping resource="mapeos/tipoComprobante.hbm.xml" />
+		<mapping resource="mapeos/tributo.hbm.xml" />
+		<mapping resource="mapeos/clienteComprobante.hbm.xml" />
+		<mapping resource="mapeos/preTicket.hbm.xml" />
+		<mapping resource="mapeos/ticketAcceso.hbm.xml" />
+		<mapping resource="mapeos/itemPreTicket.hbm.xml" />
+
+	</session-factory>
+</hibernate-configuration>

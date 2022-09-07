@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+<class name="sgh.mansilla.modelo.datos.hotel.Servicio" table="servicio">
+	<id column="idServicio" name="idServicio">
+		<generator class="identity"/>
+	</id>
+
+	<many-to-one lazy="false" name="tipoServicio" column="tipoServicio"
+		class="sgh.mansilla.modelo.datos.hotel.TipoServicio" not-null="true"/>
+
+	<property column="descripcion" name="descripcion" type="string"/>
+	<property column="precio" name="precio" type="big_decimal"/>
+
+</class>
+</hibernate-mapping>
