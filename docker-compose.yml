@@ -5,18 +5,18 @@ services:
     build: .
     container_name: sgh-web
     ports:
-      - "8080:8080"
+      - "8087:8080"
     depends_on:
       db:
         condition: service_healthy
     environment:
-      JDBC_URL: jdbc:mysql://db:3306/sgh
+      JDBC_URL: jdbc:mysql://sgh-db:3306/sgh
     restart: on-failure
 
 
   db:
     image: mysql:8.0.29
-    container_name: db
+    container_name: sgh-db
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_USER: user
@@ -25,7 +25,7 @@ services:
     volumes:
       - ./sql:/docker-entrypoint-initdb.d
     ports:
-      - 3307:3306
+      - 3309:3306
     healthcheck:
       test: "/usr/bin/mysql --user=root --password=root --execute \"SHOW DATABASES;\""
       interval: 2s
