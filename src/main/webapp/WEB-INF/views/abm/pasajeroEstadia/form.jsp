@@ -104,7 +104,7 @@
                                                     <c:when test="${not empty habitacion}">
                                                     <form:select path="habitacion" items="${habitacion}"
                                                         multiple="false" itemValue="idHabitacion"
-                                                        itemLabel="descripcion" class="form-control input-sm" />
+                                                        itemLabel="descripcionCompleta" class="form-control input-sm" />
 
                                                     </c:when>
                                                     <c:otherwise>No hay habitaciones disponibles en la fecha indicada.
