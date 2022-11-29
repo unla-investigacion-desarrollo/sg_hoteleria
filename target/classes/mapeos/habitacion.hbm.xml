@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+<class name="sgh.mansilla.modelo.datos.hotel.Habitacion" table="habitacion">
+	<id column="idHabitacion" name="idHabitacion">
+		<generator class="identity"/>
+	</id>
+	<property column="descripcion" name="descripcion" type="string"/>
+	<many-to-one lazy="false" name="estadoHabitacion" column="idEstadoHabitacion"
+		class="sgh.mansilla.modelo.datos.hotel.EstadoHabitacion" not-null="false"/>
+
+	<many-to-one lazy="false" name="tipoHabitacion" column="idTipoHabitacion"
+		class="sgh.mansilla.modelo.datos.hotel.TipoHabitacion" not-null="true"/>
+
+	<many-to-one lazy="false" name="hotel" column="idHotel"
+		class="sgh.mansilla.modelo.datos.hotel.Hotel" not-null="true"/>
+
+	<set name="caracteristicas" table="aux_caracteristicasporhabitacion"
+	inverse="false" cascade="all" lazy="false" >
+		<key>
+			 <column name="idHabitacion"  />
+		</key>
+		<many-to-many column="idCaracteristica" class="sgh.mansilla.modelo.datos.hotel.CaracteristicaHabitacion" />
+
+	</set>
+
+</class>
+</hibernate-mapping>

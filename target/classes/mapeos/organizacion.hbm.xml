@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+<class name="sgh.mansilla.modelo.datos.persona.Organizacion" table="organizacion">
+	<id column="idContacto" name="idContacto">
+		<generator class="identity"/>
+	</id>
+	<property column="email" name="email" type="string"/>
+	<property column="telefono" name="telefono" type="string"/>
+	<property column="razonSocial" name="razonSocial" type="string"/>
+	<property column="cuit" name="cuit" type="string"/>
+</class>
+</hibernate-mapping>

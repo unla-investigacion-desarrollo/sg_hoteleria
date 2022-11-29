@@ -1,0 +1,121 @@
+
+/* Ensure that the demo table scrolls */
+
+th, td {
+	white-space: nowrap;
+
+}
+
+body{
+	height: 100%;
+	background-color:rgb(245, 245, 245);background-image: -webkit-gradient(
+	linear,
+	right bottom,
+	right top,
+	color-stop(0, #9BC4E2),
+	color-stop(0.08, #9BC4E2),
+	color-stop(1, #36648B),
+	color-stop(1, #6CA6CD)
+	);
+/*background-image: -o-linear-gradient(top, #9BC4E2 0%, #9BC4E2 8%, #36648B 100%, #6CA6CD 100%);
+background-image: -moz-linear-gradient(top, #9BC4E2 0%, #9BC4E2 8%, #36648B 100%, #6CA6CD 100%);
+background-image: -webkit-linear-gradient(top, #9BC4E2 0%, #9BC4E2 8%, #36648B 100%, #6CA6CD 100%);
+background-image: -ms-linear-gradient(top, #9BC4E2 0%, #9BC4E2 8%, #36648B 100%, #6CA6CD 100%);
+background-image: linear-gradient(top, #9BC4E2 0%, #9BC4E2 8%, #36648B 100%, #6CA6CD 100%);
+*/}
+
+/*
+#mainWrapper {
+	height: 100%;
+	background-image: -webkit-gradient(
+	linear,
+	right bottom,
+	right top,
+	color-stop(0, #9BC4E2),
+	color-stop(0.08, #9BC4E2),
+	color-stop(1, #36648B),
+	color-stop(1, #6CA6CD)
+);
+background-image: -o-linear-gradient(top, #9BC4E2 0%, #9BC4E2 8%, #36648B 100%, #6CA6CD 100%);
+background-image: -moz-linear-gradient(top, #9BC4E2 0%, #9BC4E2 8%, #36648B 100%, #6CA6CD 100%);
+background-image: -webkit-linear-gradient(top, #9BC4E2 0%, #9BC4E2 8%, #36648B 100%, #6CA6CD 100%);
+background-image: -ms-linear-gradient(top, #9BC4E2 0%, #9BC4E2 8%, #36648B 100%, #6CA6CD 100%);
+background-image: linear-gradient(top, #9BC4E2 0%, #9BC4E2 8%, #36648B 100%, #6CA6CD 100%);
+}*/
+
+.floatRight{
+	float:right;
+	margin-right: 18px;
+}
+
+.floatRightPanel{
+	float:right;
+	margin-right: 0px;
+	margin-bottom: 20px;
+}
+
+.has-error{
+	color:red;
+}
+
+.generic-container {
+  width:95%;
+  margin-left: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 20px;
+  background-color: #EAE7E7;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0 0 30px black;
+}
+
+.custom-width {
+    width: 80px !important;
+}
+
+body, #mainWrapper, .form-control{
+	font-size:12px!important;
+}
+
+#mainWrapper {
+	/*height: 720px; Without explicit px values, % in children's does not work*/
+	height: 100vh; /*with Viewport-Percentage, we can handles all devices screens  */
+	padding-left:10px;
+	padding-right:10px;
+	padding-bottom:10px;
+}
+
+.login-container {
+    margin-top: 100px;
+    background-color: floralwhite;
+    width: 40%;
+    left: 30%;
+    position: absolute;
+}
+
+.login-card {
+    width: 80%;
+    margin: auto;
+}
+
+.login-form {
+    padding: 10%;
+}
+
+.authbar{
+	margin-bottom:15px;
+}
+
+.control-label{
+	text-align: left !important;
+}
+
+.panel {
+    margin-bottom: 20px;
+    background-color: #fff;
+    border: 0px solid transparent;
+    border-radius: 4px;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, .50);
+}
+

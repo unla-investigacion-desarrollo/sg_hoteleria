@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+<class name="sgh.mansilla.modelo.datos.usuario.Empleado" table="empleado">
+	<id column="idEmpleado" name="idEmpleado">
+		<generator class="identity"/>
+	</id>
+	<property column="apellido" name="apellido" type="string"/>
+	<property column="nombre" name="nombre" type="string"/>
+	<property column="dni" name="dni" type="int"/>
+	<many-to-one name = "tipoEmpleado" class = "sgh.mansilla.modelo.datos.usuario.TipoEmpleado"
+		column = "idTipoEmpleado" not-null = "true"/>
+	<many-to-one name = "usuario" class = "sgh.mansilla.modelo.datos.usuario.Usuario"
+		column = "idUsuario" not-null = "true"/>
+	<many-to-one name = "hotel" class = "sgh.mansilla.modelo.datos.usuario.Hotel"
+		column = "idHotel" not-null = "true"/>
+</class>
+</hibernate-mapping>

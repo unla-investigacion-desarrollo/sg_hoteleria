@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+<class name="sgh.mansilla.modelo.dto.facturacion.TicketAcceso" table="ticketacceso">
+	<id column="idTicketAcceso" name="idTicketAcceso">
+		<generator class="identity"/>
+	</id>
+	
+	<property column="sign" name="sign" type="string" length="512"/>
+	<property column="token" name="token" type="string" length="512"/>
+	<property column="cuit" name="cuit" type="string"/>
+	<property column="fechahoraexpiracion" name="fechaHoraExpiracion" type="timestamp"/>
+		
+</class>
+</hibernate-mapping>

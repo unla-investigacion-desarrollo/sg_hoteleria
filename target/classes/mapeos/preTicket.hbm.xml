@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+<class name="sgh.mansilla.modelo.datos.facturacion.PreTicket" table="preticket">
+	<id column="idPreTicket" name="idPreTicket">
+		<generator class="identity"/>
+	</id>
+	
+	<property column="descripcion" name="descripcion" type="string"/>
+	<property column="precio" name="precio" type="double"/>
+	<property column="fecha" name="fecha" type="date"/>
+	<property column="facturado" name="facturado" type="boolean"/>
+	
+	
+	<many-to-one lazy="false" name="clientePreTicket" column="idClientePreTicket"
+		class="sgh.mansilla.modelo.datos.facturacion.ClienteComprobante" not-null="true"/>
+		
+	<list name="itemsPreTicket" table="itempreticket" inverse="false" cascade="all" lazy="false" >
+		<key>
+			 <column name="idPreTicket"  not-null="false" />
+		</key>
+		<list-index column = "idx"/>
+		<one-to-many class="sgh.mansilla.modelo.datos.facturacion.ItemPreTicket" />
+	</list>
+	
+	<many-to-one name="concepto" class="sgh.mansilla.modelo.datos.facturacion.Concepto" fetch="join" lazy="false">
+            <column name="idConcepto" not-null="false" />
+    </many-to-one>
+		
+</class>
+</hibernate-mapping>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+<class name="sgh.mansilla.modelo.datos.estadia.Estadia" table="estadia">
+	<id column="idEstadia" name="idEstadia">
+		<generator class="identity"/>
+	</id>
+
+	<many-to-one lazy="false" name="estadoEstadia" column="idEstadoEstadia"
+		class="sgh.mansilla.modelo.datos.estadia.EstadoEstadia" not-null="true"/>
+
+	<many-to-one lazy="false" name="planAlojamiento" column="idPlanAlojamiento"
+		class="sgh.mansilla.modelo.datos.hotel.PlanAlojamiento" not-null="true"/>
+
+	<property column="precioPorNoche" name="precioPorNoche" type="big_decimal"/>
+
+	<!-- <property column="idCuenta" name="cuenta" type="integer"/>  -->
+
+	<property column="diaCheckIn" name="diaCheckIn" type="date"/>
+	<property column="diaCheckOut" name="diaCheckOut" type="date"/>
+	<property column="comentario"  name="comentario" type="string"/>
+
+</class>
+
+</hibernate-mapping>
