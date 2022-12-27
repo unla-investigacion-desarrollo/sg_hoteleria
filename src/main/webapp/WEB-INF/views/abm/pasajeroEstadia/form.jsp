@@ -81,7 +81,7 @@
 								<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
 									<div class="form-group">
 										<div class="form-line">
-											<form:select path="pasajero"
+										    <form:select path="pasajero"
                                                 multiple="false" class="form-control input-sm" >
                                                 <form:option  value="" />
                                                 <form:options items="${pasajero}" itemValue="idContacto"
@@ -93,7 +93,7 @@
 										</div>
 									</div>
 								</div>
-
+								
 								<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
 									<label for="">Habitaci&oacute;n</label>
 								</div>
@@ -126,18 +126,17 @@
 						                     <input type="submit" id="Actualizar" href="<c:url value='list?idEstadia=${idEstadia}' />" value="EDITAR" class="btn btn-block btn-lg btn-primary waves-effect" />
 						                 </div>
 						                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 m-b-20">
-<a class="btn btn-block btn-lg btn-default waves-effect" href="<c:url value='list' />">VOLVER</a>
+											<a class="btn btn-block btn-lg btn-default waves-effect" href="<c:url value='list?idEstadia=${idEstadia}' />">VOLVER</a>
 						                 </div>
 						             </div>
 								</c:when>
 								<c:otherwise>
 						             <div class="row clearfix">
-
 						                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 m-b-20">
                                             <input type="submit" id="Guardar" href="<c:url value='list?idEstadia=${idEstadia}' />" value="CREAR" class="btn btn-block btn-lg btn-primary waves-effect" />
 						                 </div>
 						                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 m-b-20">
-						                    <a class="btn btn-block btn-lg btn-default waves-effect" href="<c:url value='list' />">VOLVER</a>
+						                    <a class="btn btn-block btn-lg btn-default waves-effect" href="<c:url value='list?idEstadia=${idEstadia}' />">VOLVER</a>
 						                 </div>
 						             </div>
 								</c:otherwise>

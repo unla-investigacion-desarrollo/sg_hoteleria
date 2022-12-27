@@ -1,4 +1,4 @@
-<%@ page isELIgnored="false" %>
+<%@ page isELIgnored="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 
@@ -9,7 +9,6 @@ request.setAttribute("idEstadia", request.getParameter("idEstadia"));
 request.setAttribute("titulo", "Habitacion/Pasajero por Estadia");
 
 %>
-
 
 <%@include file="../../header.jsp"%>
 <div class="block-header">
@@ -35,10 +34,8 @@ request.setAttribute("titulo", "Habitacion/Pasajero por Estadia");
 						class="btn btn-primary waves-effect">Asignar pasajero a estad&iacute;a</a>
 				</sec:authorize>
             </div>
-			<div class="body">
-			<div class="table-responsive">
-				<table
-					class="table table-bordered table-striped table-hover js-basic-example dataTable">
+			<div class="body table-responsive">
+				<table id="dt-select2" class="table table-bordered table-striped table-hover">
 					<thead>
 						<tr>
 
@@ -48,7 +45,7 @@ request.setAttribute("titulo", "Habitacion/Pasajero por Estadia");
 				        <th>Estad&iacute;a</th>
 				        <th>Habitaci&oacute;n</th>
 				        <th>Pasajero</th>
-				        <th>Acciones</th>
+				       <th class="noExport">Acciones</th>
 					</tr>
 		    	</thead>
 	    		<tbody>
@@ -58,12 +55,12 @@ request.setAttribute("titulo", "Habitacion/Pasajero por Estadia");
 <% /* ******************************************************************************** *
 	  ********************* COMIENZO DE LOS CAMPOS DE LA ENTIDAD ********************* *
 	  ******************************************************************************** */ %>
-					<c:choose>
-				        <c:when test="${entity.estadia.idEstadia == idEstadia}">
-                            <td>${entity.estadia.descripcion}</td>
+				         <c:choose>
+				            <c:when test="${entity.estadia.idEstadia == idEstadia}">
+				             <td>${entity.estadia.descripcion}</td>
                             <td>${entity.habitacion}</td>
                             <td>${entity.pasajero.nombreCompleto}</td>
-
+                            
 <% /* ******************************************************************************** *
 	  *********************** FIN DE LOS CAMPOS DE LA ENTIDAD ************************ *
 	  ******************************************************************************** */ %>
@@ -72,7 +69,13 @@ request.setAttribute("titulo", "Habitacion/Pasajero por Estadia");
 											  *********************** FIN DE LOS CAMPOS DE LA ENTIDAD ************************ *
 											  ******************************************************************************** */
 								%>
+                            
                             <td>
+                            <sec:authorize access="hasAnyRole('ADMIN', 'USER','DBA')">
+							      <button type="button" onclick="javascript:location.href='<c:url value='new-${entity.id}?idEstadia=${idEstadia}' />'" class="btn bg-green btn-circle waves-effect waves-circle waves-float">
+                                  		 <i class="material-icons">group_add</i>
+                                  </button>
+						        </sec:authorize>
                             <sec:authorize access="hasRole('ADMIN') or hasRole('DBA')">
                                 <button type="button" onclick="javascript:location.href='<c:url value='edit-${entity.id}?idEstadia=${entity.estadia.idEstadia}&idPE=${entity.id}' />'" class="btn btn-default btn-circle waves-effect waves-circle waves-float">
                                     <i class="material-icons">mode_edit</i>
@@ -84,8 +87,8 @@ request.setAttribute("titulo", "Habitacion/Pasajero por Estadia");
                                 </button>
                             </sec:authorize>
                             </td>
-                          </c:when>
-			        </c:choose>
+                       </c:when>
+			        </c:choose> 
 					</tr>
 				</c:forEach>
 					</tbody>
@@ -94,7 +97,6 @@ request.setAttribute("titulo", "Habitacion/Pasajero por Estadia");
 			</div>
 		</div>
 	</div>
-</div>
 
 <%@include file="../../footer.jsp"%>
 <!-- Jquery DataTable Plugin Js -->
@@ -106,4 +108,4 @@ request.setAttribute("titulo", "Habitacion/Pasajero por Estadia");
 	type="text/javascript"></script>
 <script src=" <c:url value= '/static/js/comprobante.js'/>"
 	type="text/javascript"></script>
-
+	

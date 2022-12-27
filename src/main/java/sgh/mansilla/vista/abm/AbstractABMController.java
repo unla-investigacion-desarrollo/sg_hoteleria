@@ -1,5 +1,6 @@
 package sgh.mansilla.vista.abm;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import sgh.mansilla.modelo.datos.estadia.PasajeroEstadia;
 import sgh.mansilla.modelo.datos.persona.Pasajero;
 import sgh.mansilla.modelo.negocio.ABM;
 
@@ -102,7 +104,46 @@ public abstract class AbstractABMController<ID, ENTITY> {
 		model.addAttribute("loggedinuser", getPrincipal());
 		return "redirect:list";
 	}
+	
+	@RequestMapping(value = { "/new-{id}"}, method = RequestMethod.GET)
+	public String newEntityId(@PathVariable ID id, ModelMap model,
+			@RequestParam(required = false) Integer idEstadia) {
+		ENTITY entity = abm.buscarPorId(id);		
 
+		model.addAttribute("entity", entity);
+		model.addAttribute("edit", false);
+		model.addAttribute("loggedinuser", getPrincipal());
+
+		if(idEstadia != null){
+			model.addAttribute("idEstadia", idEstadia);
+		}
+		
+		return viewBaseLocation + "/form";
+	}
+	
+	@RequestMapping(value = { "/new-{id}" }, method = RequestMethod.POST)
+	public String saveEntityId(@Valid ENTITY tipoConsumo, BindingResult result, ModelMap model,
+			@RequestParam(required = false) Integer idEstadia) {
+		try{
+			if(idEstadia != null){
+				model.addAttribute("idEstadia", idEstadia);
+			}
+
+			if (result.hasErrors()) {
+				return viewBaseLocation + "/form";
+			}
+			
+			abm.guardar(tipoConsumo);
+		
+			model.addAttribute("success", "La modificaci&oacuten se realiz&oacute correctamente.");
+		} catch (Exception exception) {
+			model.addAttribute("success", "La modificaci&oacuten no pudo realizarse.");
+		}
+
+		model.addAttribute("loggedinuser", getPrincipal());
+		return "redirect:list";
+	}
+	
 	/**
 	 * This method will provide the medium to update an existing user.
 	 */
