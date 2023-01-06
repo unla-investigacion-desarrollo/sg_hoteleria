@@ -10,6 +10,8 @@ request.setAttribute("titulo", "Sistema de Gestion Hotelera");
 %>
 
 <%@include file="../../header.jsp"%>
+
+
 <div class="block-header">
 	<h2>
 		ESTADIA <small>Lista de estad&iacute;as</a></small>
@@ -35,8 +37,7 @@ request.setAttribute("titulo", "Sistema de Gestion Hotelera");
 				</sec:authorize>
             </div>
 			<div class="body table-responsive">
-				<table
-					class="table table-bordered table-striped table-hover js-exportable dataTable">
+				<table id="dt-select" class="table table-bordered table-striped table-hover">
 					<thead>
 						<tr>
 
@@ -160,4 +161,17 @@ request.setAttribute("titulo", "Sistema de Gestion Hotelera");
 
 <script src=" <c:url value= '/static/js/comprobante.js'/>"
 	type="text/javascript"></script>
-
+	
+	<script type="text/javascript">
+	$(document).ready(function() {
+    $('#dt-select').DataTable( {
+    	dom: 'Bfrtip',
+    	responsive: true,
+        buttons: [
+            'pdf', 'excel','csv' , 'print'
+        ]
+        ,"order": [[ 4, "desc" ]]
+    } );
+	} );
+	</script>
+	

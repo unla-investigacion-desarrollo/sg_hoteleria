@@ -1,5 +1,7 @@
 package sgh.mansilla.modelo.datos.estadia;
 
+import java.util.Objects;
+
 import sgh.mansilla.modelo.dao.Identificable;
 import sgh.mansilla.modelo.datos.hotel.Habitacion;
 import sgh.mansilla.modelo.datos.persona.Pasajero;
@@ -74,5 +76,47 @@ public class PasajeroEstadia implements Identificable<Integer>{
 		return builder.toString();
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((estadia == null) ? 0 : estadia.hashCode());
+		result = prime * result + ((habitacion == null) ? 0 : habitacion.hashCode());
+		result = prime * result + ((idPasajeroEstadia == null) ? 0 : idPasajeroEstadia.hashCode());
+		result = prime * result + ((pasajero == null) ? 0 : pasajero.hashCode());
+		return result;		
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		PasajeroEstadia other = (PasajeroEstadia) obj;
+		if (estadia == null) {
+			if (other.estadia != null)
+				return false;
+		} else if (!estadia.equals(other.estadia))
+			return false;
+		if (habitacion == null) {
+			if (other.habitacion != null)
+				return false;
+		} else if (!habitacion.equals(other.habitacion))
+			return false;
+		if (idPasajeroEstadia == null) {
+			if (other.idPasajeroEstadia != null)
+				return false;
+		} else if (!idPasajeroEstadia.equals(other.idPasajeroEstadia))
+			return false;
+		if (pasajero == null) {
+			if (other.pasajero != null)
+				return false;
+		} else if (!pasajero.equals(other.pasajero))
+			return false;
+		return true;		
+	}
 
 }

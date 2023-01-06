@@ -89,7 +89,11 @@ public class Habitacion implements Identificable<Integer>  {
 	public void setHotel(Hotel hotel) {
 		this.hotel = hotel;
 	}
-
+	
+	public String getDescripcionCompleta() {
+		return descripcion +" "+ "("+ tipoHabitacion+")";
+	}
+	
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
