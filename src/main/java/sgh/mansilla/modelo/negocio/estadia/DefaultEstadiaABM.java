@@ -52,26 +52,15 @@ public class DefaultEstadiaABM extends ABMGenerico<Integer, Estadia> implements 
 	protected void actualizarEntidad(Estadia entidadPersistida, Estadia entidadActualizada) {
 
 		entidadPersistida.setPrecioPorNoche(entidadActualizada.getPrecioPorNoche());
-		Boolean cambioFecha = false;
-		//la nueva fecha inicio es posterior a la anterior que no a la final
-		if((entidadPersistida.getDiaCheckIn().compareTo(entidadActualizada.getDiaCheckIn())<=0)
-				&& (entidadActualizada.getDiaCheckIn().compareTo(entidadPersistida.getDiaCheckOut())<=0)){
+	
+		if(entidadActualizada.getDiaCheckIn().compareTo(entidadActualizada.getDiaCheckOut())<=0) {
 			entidadPersistida.setDiaCheckIn(entidadActualizada.getDiaCheckIn());
-			cambioFecha = true;
 		}
-		if(cambioFecha){
-			if((entidadActualizada.getDiaCheckOut().compareTo(entidadActualizada.getDiaCheckIn())>=0)
-					&& (entidadActualizada.getDiaCheckOut().compareTo(entidadPersistida.getDiaCheckOut())<=0)){
-				entidadPersistida.setDiaCheckOut(entidadActualizada.getDiaCheckOut());
-			}
-		} else {
-			if((entidadActualizada.getDiaCheckOut().compareTo(entidadPersistida.getDiaCheckIn())>=0)
-					&& (entidadActualizada.getDiaCheckOut().compareTo(entidadPersistida.getDiaCheckOut())<=0)){
-				entidadPersistida.setDiaCheckOut(entidadActualizada.getDiaCheckOut());
-			}
+		if(entidadActualizada.getDiaCheckOut().compareTo(entidadActualizada.getDiaCheckIn())>=0) {
+			entidadPersistida.setDiaCheckOut(entidadActualizada.getDiaCheckOut());
 		}
+		
 		entidadPersistida.setComentario(entidadActualizada.getComentario());
-
 
 		PlanAlojamiento attachedPlan = planAlojamientoABM.buscarPorId(entidadActualizada.getPlanAlojamiento().getId());
 		entidadPersistida.setPlanAlojamiento(attachedPlan);
@@ -83,6 +72,6 @@ public class DefaultEstadiaABM extends ABMGenerico<Integer, Estadia> implements 
 
 	@Override
 	public List<Estadia> listar() {
-		return dao.list(true, OrderType.ASCENDING, "idEstadia");
+		return dao.list(true, OrderType.ASCENDING, "idEstadia");	
 	}
 }
