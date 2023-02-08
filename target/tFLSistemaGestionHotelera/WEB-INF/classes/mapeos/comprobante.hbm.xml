@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+<class name="sgh.mansilla.modelo.datos.facturacion.Comprobante" table="comprobante">
+	<id column="idComprobante" name="idComprobante">
+		<generator class="identity"/>
+	</id>
+	
+	<property column="nroComprobante" name="nroComprobante" type="int"/>
+	<property column="ptoVenta" name="ptoVenta" type="int"/>
+	<property column="fechaComprobante" name="fechaComprobante" type="date"/>
+	<property column="fechaFacturadoDesde" name="fechaFacturadoDesde" type="date"/>
+	<property column="fechaFacturadoHasta" name="fechaFacturadoHasta" type="date"/>
+	<property column="vencimientoPago" name="vencimientoPago" type="date"/>
+	<property column="importeNeto" name="importeNeto" type="double"/>
+	<property column="importeNoGravado" name="importeNoGravado" type="double"/>
+	<property column="totalIva" name="totalIva" type="double"/>
+	<property column="importeTotal" name="importeTotal" type="double"/>
+	<property column="importeExcento" name="importeExcento" type="double"/>
+	<property column="importeTributos" name="importeTributos" type="double"/>
+	<property column="cae" name="cae" type="string"/>
+	<property column="vencimientoCae" name="vencimientoCae" type="date"/>
+	
+
+	
+	<many-to-one lazy="false" name="tipoComprobante" column="idTipoComprobante"
+		class="sgh.mansilla.modelo.datos.facturacion.TipoComprobante" not-null="true"/>
+		
+	<many-to-one lazy="false" name="clienteComprobante" column="idClienteComprobante"
+		class="sgh.mansilla.modelo.datos.facturacion.ClienteComprobante" not-null="true"/>
+
+	<many-to-one lazy="false" name="moneda" column="idMoneda"
+		class="sgh.mansilla.modelo.datos.facturacion.Moneda" not-null="true"/>
+		
+	<many-to-one lazy="false" name="conceptosAIncluir" column="idConceptosAIncluir"
+		class="sgh.mansilla.modelo.datos.facturacion.ConceptosAIncluir" not-null="true"/>
+		
+	<many-to-one lazy="false" name="formaDePago" column="idFormaDePago"
+		class="sgh.mansilla.modelo.datos.facturacion.FormaDePago" not-null="true"/>
+
+	<set name="alicuotas" table="alicuota" inverse="false" cascade="all" lazy="false" >
+		<key>
+			 <column name="idComprobante"  not-null="true" />
+		</key>
+		<one-to-many class="sgh.mansilla.modelo.datos.facturacion.Alicuota" />
+	</set>
+	
+	<list name="conceptos" table="concepto" inverse="false" cascade="all" lazy="false" >
+		<key>
+			 <column name="idComprobante"  not-null="false" />
+		</key>
+		<list-index column = "idx"/>
+		<one-to-many class="sgh.mansilla.modelo.datos.facturacion.Concepto" />
+	</list>
+	
+	<set name="otrosTributos" table="tributo" inverse="false" cascade="all" lazy="false" >
+		<key>
+			 <column name="idComprobante"  not-null="true" />
+		</key>
+		<one-to-many class="sgh.mansilla.modelo.datos.facturacion.Tributo" />
+	</set>
+	
+</class>
+</hibernate-mapping>

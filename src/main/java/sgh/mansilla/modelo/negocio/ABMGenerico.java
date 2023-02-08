@@ -35,6 +35,7 @@ public abstract class ABMGenerico<ID extends Serializable, ENTIDAD extends Ident
 
 	@Override
 	public void guardar(ENTIDAD entidad) {
+		
 		dao.persist(entidad);
 	}
 

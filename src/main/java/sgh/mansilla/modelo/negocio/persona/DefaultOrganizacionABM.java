@@ -14,15 +14,25 @@ import org.springframework.stereotype.Service;
 
 import sgh.mansilla.modelo.dao.AbstractDao.OrderType;
 import sgh.mansilla.modelo.dao.DaoGenerico;
+import sgh.mansilla.modelo.datos.facturacion.ClienteComprobante;
 import sgh.mansilla.modelo.datos.persona.Organizacion;
+
 import sgh.mansilla.modelo.negocio.ABMGenerico;
+import sgh.mansilla.modelo.negocio.facturacion.Abm.DefaultClienteComprobanteABM;
 
 @Service("organizacionABM")
-@Transactional
+
 public class DefaultOrganizacionABM extends ABMGenerico<Integer, Organizacion> implements OrganizacionABM {
 
 	protected final Logger logger = LoggerFactory.getLogger(this.getClass());
-
+	
+	// @Autowired
+	//DefaultClienteComprobanteABM clienteComprobante;
+	
+	//DefaultTipoDocumentoABM tipoDocumento;
+	
+	//ClienteComprobante cliente;
+	
 	@Override
 	@Autowired
 	@Qualifier("organizacionDao")
@@ -32,7 +42,7 @@ public class DefaultOrganizacionABM extends ABMGenerico<Integer, Organizacion> i
 
 	@Override
 	public void guardar(Organizacion entidad) {
-		super.guardar(entidad);
+		super.guardar(entidad);// guarda en organizacion
 	}
 
 	@Override

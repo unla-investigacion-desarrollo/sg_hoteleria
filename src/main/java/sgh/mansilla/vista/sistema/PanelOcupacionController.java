@@ -5,7 +5,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
+import org.bouncycastle.asn1.ocsp.Request;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,14 +27,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import sgh.mansilla.modelo.datos.estadia.Estadia;
 import sgh.mansilla.modelo.datos.estadia.EstadoEstadia;
+import sgh.mansilla.modelo.datos.estadia.PasajeroEstadia;
 import sgh.mansilla.modelo.datos.hotel.Habitacion;
+import sgh.mansilla.modelo.datos.hotel.TipoHabitacion;
 import sgh.mansilla.modelo.negocio.estadia.EstadiaABM;
 import sgh.mansilla.modelo.negocio.estadia.EstadoEstadiaABM;
 import sgh.mansilla.modelo.negocio.estadia.PasajeroEstadiaABM;
 import sgh.mansilla.modelo.negocio.hotel.HabitacionABM;
+import sgh.mansilla.modelo.negocio.hotel.TipoHabitacionABM;
 import sgh.mansilla.modelo.negocio.persona.PasajeroABM;
 import sgh.mansilla.modelo.negocio.sistema.Ocupacion;
 import sgh.mansilla.modelo.negocio.sistema.VistaOcupacion;
+import sgh.mansilla.vista.abm.EstadiaABMController.PasajeroConEstadia;
 
 @Controller
 @RequestMapping("/panelOcupacion")
@@ -48,7 +54,10 @@ public class PanelOcupacionController {
 
 	@Autowired
 	HabitacionABM habitacionABM;
-
+	
+	@Autowired
+	TipoHabitacionABM tipoHabitacionABM;
+	
 	@Autowired
 	PasajeroABM pasajeroABM;
 
@@ -63,34 +72,51 @@ public class PanelOcupacionController {
 
 	protected Logger logger = LoggerFactory.getLogger(this.getClass());
 
-
+	
 	/**
 	 * This method will list all existing users.
 	 *
 	 * @throws ParseException
 	 */
-	@RequestMapping(value = { "/", "/ocupacion" }, method = RequestMethod.GET)
+	
+	@ModelAttribute("tipoHabitacion")
+	public List<TipoHabitacion> initializeProfiles() {
+		return tipoHabitacionABM.listar();
+	}
+	
+	@RequestMapping(value = { "/", "/list" }, method = RequestMethod.GET)
 	public String listEntities(ModelMap model, @RequestParam(required = false) Date desde,
-			@RequestParam(required = false) Date hasta) throws ParseException {
+			@RequestParam(required = false) Date hasta,@RequestParam(required = false) Integer idTipoHabitacion) throws ParseException {
+		
+
 
 		if((desde != null) && (hasta.before(desde))){
 			Calendar nuevoHasta = Calendar.getInstance();
 			nuevoHasta.setTime(desde);
-			nuevoHasta.add(Calendar.DAY_OF_MONTH, 15);
+			nuevoHasta.add(Calendar.DAY_OF_MONTH, 3);
 			hasta = nuevoHasta.getTime();
 		}
 
-		desde = definirFecha(desde, -2);
-		hasta = definirFecha(hasta, 15);
-
+		desde = definirFecha(desde, 0);
+		hasta = definirFecha(hasta, 10);
+		//idTipoHabitacion=1;
+		
 		ArrayList<Estadia> estadias = (ArrayList<Estadia>) estadiaABM.listar();
 		ArrayList<Habitacion> habitaciones = (ArrayList<Habitacion>) habitacionABM.listar();
 		ArrayList<VistaOcupacion> ocupaciones = new ArrayList<VistaOcupacion>();
-
+		List<TipoHabitacion> tipoHabitacion = (List<TipoHabitacion>) tipoHabitacionABM.listar();
+		
+		ArrayList<Habitacion> habitacionesConTipo=new ArrayList<Habitacion>();
 		ArrayList<String> fechasString = armarColumnas(desde, hasta);
-
-		for (int auxHab = 0; auxHab < habitaciones.size(); auxHab++) {
-			Habitacion habitacion = habitaciones.get(auxHab);
+		
+		for(int i=0;i<habitaciones.size();i++) {//este for carga la lista con las habitaciones de tipo idTipoHabitacion
+			if(habitaciones.get(i).getTipoHabitacion().getIdTipoHabitacion()==idTipoHabitacion) {
+				habitacionesConTipo.add(habitaciones.get(i));
+			}
+		}
+		
+		for (int auxHab = 0; auxHab < habitacionesConTipo.size(); auxHab++) {
+			Habitacion habitacion = habitacionesConTipo.get(auxHab);
 			VistaOcupacion vistaOcupacion = new VistaOcupacion(habitacion);
 			for (int auxFechas = 1; auxFechas < fechasString.size(); auxFechas++) {
 				Calendar fecha = interpretarFecha(fechasString.get(auxFechas));
@@ -133,6 +159,9 @@ public class PanelOcupacionController {
 		SimpleDateFormat formatter = new SimpleDateFormat(FORMATO_CAMPO_FECHA);
 		model.addAttribute("desde", formatter.format(desde));
 		model.addAttribute("hasta", formatter.format(hasta));
+		model.addAttribute("tipoHabitacion",tipoHabitacion);
+		model.addAttribute("idTipoHabitacion",idTipoHabitacion);
+		
 
 
 		model.addAttribute("vista", ocupaciones);
@@ -141,7 +170,10 @@ public class PanelOcupacionController {
 
 		return "/panelOcupacion";
 	}
+	
+	
 
+	@SuppressWarnings("unused")
 	private Date definirFecha(Date fecha, int desplazamientoPorDefecto) {
 		if (fecha == null) {
 			Calendar calendar = Calendar.getInstance();
@@ -150,7 +182,7 @@ public class PanelOcupacionController {
 		}
 		return fecha;
 	}
-
+	
 
 	public ArrayList<String> armarColumnas(Date armarDesde, Date armarHasta) {
 		SimpleDateFormat formatter = new SimpleDateFormat(DATE_FORMAT);

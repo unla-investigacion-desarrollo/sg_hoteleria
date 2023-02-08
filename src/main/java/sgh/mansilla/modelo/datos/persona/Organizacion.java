@@ -11,8 +11,9 @@ import sgh.mansilla.modelo.datos.cuenta.Cuenta;
 public class Organizacion extends PersonaAbstracta implements ICliente, Identificable<Integer> {
 	String razonSocial;
 	String cuit;
+	int tipoDocumento = 6;
 	Cuenta cuenta;
-
+	
 	public Organizacion() {
 
 	}
@@ -53,7 +54,13 @@ public class Organizacion extends PersonaAbstracta implements ICliente, Identifi
 	public void setCuenta(Cuenta cuenta) {
 		this.cuenta = cuenta;
 	}
-
+	
+	public int getTipoDocumento() {
+		return tipoDocumento;
+	}
+	public void setTipoDocumento(int tipoDocumento) {
+		this.tipoDocumento = tipoDocumento;
+	}
 	@Override
 	public Integer getId() {
 		// TODO Auto-generated method stub

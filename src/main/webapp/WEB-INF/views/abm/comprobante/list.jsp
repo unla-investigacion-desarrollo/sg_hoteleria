@@ -63,7 +63,7 @@
 											  ********************* COMIENZO DE LOS CAMPOS DE LA ENTIDAD ********************* *
 											  ******************************************************************************** */
 								%>
-								<td>${entity.nroComprobante}</td>
+								<td>${entity.idComprobante}</td>
 								<td>${entity.tipoComprobante.descripcion}</td>
 								<td>${entity.clienteComprobante.nombre}</td>
 								<td>${entity.moneda.descripcion}</td>

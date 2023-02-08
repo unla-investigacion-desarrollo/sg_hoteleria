@@ -55,7 +55,7 @@ public abstract class AbstractABMController<ID, ENTITY> {
 	
 		return viewBaseLocation + "/list";
 	}
-
+	
 	/**
 	 * This method will provide the medium to add a new user.
 	 */

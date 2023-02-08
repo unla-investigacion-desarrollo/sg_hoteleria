@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Set;
 
 import sgh.mansilla.modelo.dao.Identificable;
+import sgh.mansilla.modelo.datos.persona.Organizacion;
 import sgh.mansilla.modelo.datos.persona.Pasajero;
 import sgh.mansilla.modelo.datos.usuario.Empleado;
 
@@ -37,7 +38,18 @@ public class Comprobante implements Identificable<Integer>  {
 		private double importeTributos; //ImpTrib
 		private String cae;
 		private Date vencimientoCae;
+		private Organizacion organizacion;
 		
+		
+
+		public Organizacion getOrganizacion() {
+			return organizacion;
+		}
+
+		public void setOrganizacion(Organizacion organizacion) {
+			this.organizacion = organizacion;
+		}
+
 		@Override
 		public Integer getId() {
 			// TODO Auto-generated method stub

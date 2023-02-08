@@ -17,7 +17,6 @@ import sgh.mansilla.modelo.datos.facturacion.ClienteComprobante;
 import sgh.mansilla.modelo.negocio.ABMGenerico;
 
 @Service("clienteComprobanteABM")
-@Transactional
 public class DefaultClienteComprobanteABM extends ABMGenerico<Integer, ClienteComprobante> implements ClienteComprobanteABM {
 
 	protected final Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -31,7 +30,9 @@ public class DefaultClienteComprobanteABM extends ABMGenerico<Integer, ClienteCo
 
 	@Override
 	public void guardar(ClienteComprobante entidad) {
+		
 		super.guardar(entidad);
+		
 	}
 
 	@Override

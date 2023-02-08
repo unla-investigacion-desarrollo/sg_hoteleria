@@ -49,7 +49,9 @@ public abstract class AbstractDao<PK extends Serializable, T> implements DaoGene
 	@Override
 	public void persist(T entity) {
 		// getSession().persist(entity);
+		
 		getSession().save(entity);
+		
 	}
 
 	/*

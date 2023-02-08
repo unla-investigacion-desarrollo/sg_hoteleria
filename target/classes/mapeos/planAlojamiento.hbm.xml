@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+<class name="sgh.mansilla.modelo.datos.hotel.PlanAlojamiento" table="planalojamiento">
+	<id column="idPlanAlojamiento" name="idPlanAlojamiento">
+		<generator class="identity"/>
+	</id>
+
+	<property column="plan" name="plan" type="string"/>
+	<property column="precioExtraPorNoche" name="precioExtraPorNoche" type="big_decimal"/>
+
+
+	<set name="lstServicio" table="aux_serviciosporplan" inverse="false" cascade="all" lazy="false" >
+		<key>
+			 <column name="idPlanAlojamiento"  />
+		</key>
+		<many-to-many column="idServicio" class="sgh.mansilla.modelo.datos.hotel.Servicio" />
+
+	</set>
+</class>
+</hibernate-mapping>

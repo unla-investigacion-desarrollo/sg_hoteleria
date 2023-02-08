@@ -60,6 +60,9 @@ import sgh.mansilla.modelo.datos.facturacion.Moneda;
 import sgh.mansilla.modelo.datos.facturacion.PreTicket;
 import sgh.mansilla.modelo.datos.facturacion.RespuestaProcesarFactura;
 import sgh.mansilla.modelo.datos.facturacion.TipoComprobante;
+import sgh.mansilla.modelo.datos.hotel.TipoHabitacion;
+import sgh.mansilla.modelo.datos.persona.Organizacion;
+import sgh.mansilla.modelo.datos.persona.Pasajero;
 import sgh.mansilla.modelo.dto.facturacion.ComprobanteDTO;
 import sgh.mansilla.modelo.dto.facturacion.TicketAcceso;
 import sgh.mansilla.modelo.dto.facturacion.Vendedor;
@@ -69,11 +72,15 @@ import sgh.mansilla.modelo.negocio.facturacion.Abm.ClienteComprobanteABM;
 import sgh.mansilla.modelo.negocio.facturacion.Abm.ConceptosAIncluirABM;
 import sgh.mansilla.modelo.negocio.facturacion.Abm.FormaDePagoABM;
 import sgh.mansilla.modelo.negocio.facturacion.Abm.MonedaABM;
+import sgh.mansilla.modelo.negocio.facturacion.Abm.OrganizacionABMFacturacion;
 import sgh.mansilla.modelo.negocio.facturacion.Abm.PreTicketABM;
 import sgh.mansilla.modelo.negocio.facturacion.Abm.TicketAccesoABM;
 import sgh.mansilla.modelo.negocio.facturacion.Abm.TipoComprobanteABM;
 import sgh.mansilla.modelo.negocio.facturacion.Servicios.FacturaToPDF;
 import sgh.mansilla.modelo.negocio.facturacion.Servicios.ServicioAfip;
+import sgh.mansilla.modelo.negocio.persona.DefaultOrganizacionABM;
+import sgh.mansilla.modelo.negocio.persona.OrganizacionABM;
+import sgh.mansilla.modelo.negocio.persona.PasajeroABM;
 
 @Controller
 @RequestMapping("/comprobante")
@@ -94,6 +101,7 @@ public class ComprobanteABMController extends AbstractABMController<Integer, Com
 	@Autowired
 	TicketAccesoABM ticketAccesoABM;
 	
+	
 	@Autowired
 	@Qualifier("comprobanteABM")
 	protected void setAbm(ABM<Integer, Comprobante> abm) {
@@ -112,16 +120,18 @@ public class ComprobanteABMController extends AbstractABMController<Integer, Com
 	/**
 	 * This method will provide the medium to add a new user.
 	 */
-	@RequestMapping(value = { "/newComprobante"}, method = RequestMethod.GET)
-	public String newEntity(ModelMap model) {
-		Comprobante entity = createEntity();
-		model.addAttribute("titulo", "Crear Comprobante");
-		model.addAttribute("entity", entity);
-		model.addAttribute("edit", false);
-		model.addAttribute("loggedinuser", getPrincipal());
-		return viewBaseLocation + "/form";
-	}
 	
+	  @RequestMapping(value = { "/newComprobante"}, method = RequestMethod.GET)
+	  public String newEntity(ModelMap model) { 
+		  Comprobante entity = createEntity(); 
+	  model.addAttribute("titulo","Crear Comprobante"); 
+	  model.addAttribute("entity", entity);
+	  model.addAttribute("edit", false); 
+	  model.addAttribute("loggedinuser",getPrincipal());
+	 
+	  return viewBaseLocation + "/form"; 
+	  }
+	 
 	/**
 	 * This method will be called on form submission, handling POST request for
 	 * saving user in database. It also validates the user input
@@ -327,6 +337,7 @@ public class ComprobanteABMController extends AbstractABMController<Integer, Com
 	public List<FormaDePago> initializeFormaDePago() {
 		return formaDePagoABM.listar();
 	}
+	
 	
 	private class ClienteComprobanteEditor extends PropertyEditorSupport {
 

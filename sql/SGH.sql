@@ -1,5 +1,7 @@
 CREATE DATABASE  IF NOT EXISTS `sgh` /*!40100 DEFAULT CHARACTER SET latin1 */;
 USE `sgh`;
+
+
 -- MySQL dump 10.13  Distrib 8.0.28, for Win64 (x86_64)
 --
 -- Host: zf4nk2bcqjvif4in.cbetxkdyhwsb.us-east-1.rds.amazonaws.com    Database: qiv69jsgdrk5dp6k
@@ -328,12 +330,15 @@ CREATE TABLE `clientecomprobante` (
   `domicilio` varchar(255) DEFAULT NULL,
   `localidad` varchar(255) DEFAULT NULL,
   `mail` varchar(255) DEFAULT NULL,
+  `idOrganizacion` INT NULL DEFAULT NULL,
   PRIMARY KEY (`idClienteComprobante`),
   KEY `FK_t48g5h1f99j72hrkwtwibidwr` (`idTipoDocumento`),
   CONSTRAINT `FK_t48g5h1f99j72hrkwtwibidwr` FOREIGN KEY (`idTipoDocumento`) REFERENCES `tipodocumento` (`idTipoDocumento`)
+  -- CONSTRAINT FOREIGN KEY(`idOrganizacion`) REFERENCES  `organizacion` (`idContacto`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
+-- Alter table clienteComprobante add FOREIGN KEY(`idOrganizacion`) REFERENCES  `organizacion` (`idContacto`);
 --
 -- Dumping data for table `clientecomprobante`
 --
@@ -1346,3 +1351,59 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2022-08-23 19:25:19
+
+-- trigger para organizacion:
+delimiter //
+create trigger agregoClienteComprobanteO after insert on organizacion
+for each row 
+begin
+	insert into clienteComprobante(nombre,documento,mail) values(new.razonSocial,new.cuit,new.eMail);
+end//
+delimiter ;
+
+delimiter //
+create trigger updateClienteComprobanteO after update on organizacion
+for each row 
+begin
+	update clienteComprobante set nombre=new.razonSocial,documento=new.cuit,mail=new.email
+		where documento=old.cuit;
+end//
+delimiter ;
+
+delimiter //
+create trigger eliminarClienteComprobanteO after delete on organizacion
+for each row
+begin
+	delete from clienteComprobante where documento=old.cuit;
+end//
+delimiter ;
+
+-- trigger para pasajero:
+
+
+delimiter //
+create trigger agregoClienteComprobanteP after insert on pasajero
+for each row 
+begin
+	insert into clienteComprobante(nombre,documento,idTipoDocumento,mail) values(concat(new.nombre," ",new.apellido),new.documento,new.idTipoDocumento,new.email);
+end//
+delimiter ;
+
+
+delimiter //
+create trigger updateClienteComprobanteP after update on pasajero
+for each row 
+begin
+	update clienteComprobante set nombre=concat(new.nombre," ",new.apellido),documento=new.documento,idTipoDocumento=new.idTipoDocumento,mail=new.email
+		where documento=old.documento;
+end//
+delimiter ;
+
+delimiter //
+create trigger deleteClienteComprobanteP after delete on pasajero
+for each row 
+begin
+	delete from clienteComprobante where documento=old.documento;
+end//
+delimiter ;
+

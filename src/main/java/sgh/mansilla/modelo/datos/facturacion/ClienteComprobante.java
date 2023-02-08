@@ -99,8 +99,12 @@ public class ClienteComprobante implements Identificable<Integer>{
 
 	@Override
 	public String toString() {
-		return nombre;
+		return "ClienteComprobante [idClienteComprobante=" + idClienteComprobante + ", nombre=" + nombre + ", apellido="
+				+ apellido + ", razonSocial=" + razonSocial + ", tipoDocumento=" + tipoDocumento + ", documento="
+				+ documento + ", domicilio=" + domicilio + ", localidad=" + localidad + ", mail=" + mail + "]";
 	}
+
+	
 	
 	
 }

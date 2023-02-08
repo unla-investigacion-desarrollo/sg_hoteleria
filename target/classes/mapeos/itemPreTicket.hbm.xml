@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+<class name="sgh.mansilla.modelo.datos.facturacion.ItemPreTicket" table="itempreticket">
+	<id column="idItemPreTicket" name="idItemPreTicket">
+		<generator class="identity"/>
+	</id>
+	
+	<property column="cantidad" name="cantidad" type="int"/>
+	<property column="descripcion" name="descripcion" type="string"/>
+	<property column="precio" name="precio" type="double"/>
+    <many-to-one name="preTicket" class="sgh.mansilla.modelo.datos.facturacion.PreTicket" fetch="select">
+            <column name="idPreTicket" not-null="false" />
+    </many-to-one>
+
+</class>
+</hibernate-mapping>
