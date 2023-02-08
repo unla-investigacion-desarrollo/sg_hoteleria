@@ -80,7 +80,7 @@
 								<td>
 								<sec:authorize access="hasRole('ADMIN') or hasRole('DBA')">
 								<c:choose>
-									<c:when test="${entity.cae != null}">
+									<c:when test="${entity.cae != null || entity.cae == null}">
 										<button type="button" onclick="window.open('<c:url value='Download/${entity.id}' />')" class="btn btn-success btn-circle waves-effect waves-circle waves-float">
 										    <i class="material-icons">file_download</i>											
 										</button>

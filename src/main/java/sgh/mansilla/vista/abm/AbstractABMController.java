@@ -48,7 +48,7 @@ public abstract class AbstractABMController<ID, ENTITY> {
 
 		List<ENTITY> entities = abm.listar();
 
-		logger.info("Tengo {} usuarios registrados", entities.size());
+		logger.info("I have {} registered users", entities.size());
 		
 		model.addAttribute("entities", entities);
 		model.addAttribute("loggedinuser", getPrincipal());
@@ -94,10 +94,10 @@ public abstract class AbstractABMController<ID, ENTITY> {
 				model.addAttribute("idEstadia", idEstadia);
 			}
 	
-			model.addAttribute("success", "La creaci&oacuten se realiz&oacute correctamente.");
+			model.addAttribute("success", "The creation was successful.");
 			
 		} catch(Exception e) {
-			model.addAttribute("success", "La creaci&oacuten no pudo realizarse.");
+			model.addAttribute("errorMsg", "The creation could not be realized.");
 		}
 		model.addAttribute("loggedinuser", getPrincipal());
 		return "redirect:list";
@@ -139,9 +139,9 @@ public abstract class AbstractABMController<ID, ENTITY> {
 
 			abm.actualizar(entity);
 
-			model.addAttribute("success", "La modificaci&oacuten se realiz&oacute correctamente.");
+			model.addAttribute("success", "The modification was successful.");
 		} catch (Exception exception) {
-			model.addAttribute("success", "La modificaci&oacuten no pudo realizarse.");
+			model.addAttribute("errorMsg", "The modification could not be made.");
 		}
 
 		model.addAttribute("loggedinuser", getPrincipal());
@@ -157,13 +157,13 @@ public abstract class AbstractABMController<ID, ENTITY> {
 	public String deleteUser(@PathVariable ID id, ModelMap model, @RequestParam(required = false) Integer idEstadia) {
 		try{
 			abm.eliminarPorId(id);
-			model.addAttribute("success", "La eliminaci&oacuten se realiz&oacute correctamente.");
+			model.addAttribute("success", "The elimination was successful.");
 			if(idEstadia != null){
 				model.addAttribute("idEstadia", idEstadia);
 			}
 		}
 		catch (Exception exception) {
-			model.addAttribute("success", "No se pudo completar la solicitud. Comuniquese con el administrador del sistema.");
+			model.addAttribute("errorMsg", "The application could not be completed. Please contact your system administrator.");
 		}
 
 

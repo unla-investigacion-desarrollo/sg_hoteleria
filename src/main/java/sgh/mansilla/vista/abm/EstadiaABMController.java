@@ -83,9 +83,9 @@ public class EstadiaABMController extends AbstractABMController<Integer, Estadia
 
 
 
-		logger.info("Tengo {} usuarios registrados", entities.size());
+		logger.info("I have {} registered users", entities.size());
 
-		logger.info("Tengo {} usuarios filtrados", pasajerosFiltrados.size());
+		logger.info("I have {} filtered users", pasajerosFiltrados.size());
 
 		model.addAttribute("entities", entities);
 		model.addAttribute("pasajeros", pasajeros);

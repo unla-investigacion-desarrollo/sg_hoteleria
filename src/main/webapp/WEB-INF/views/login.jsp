@@ -57,12 +57,12 @@
                         </div>
                     </div>
                     <c:if test="${param.error != null}">
-						<div class="alert alert-danger">
+						<div class="alert alert-danger" role= "alert">
 							<p>User/Password are not valid.</p>
 						</div>
 					</c:if>
 					<c:if test="${param.logout != null}">
-						<div class="alert alert-success">
+						<div class="alert alert-success"role="alert">
 							<p>The session ended successfully.</p>
 						</div>
 					</c:if>

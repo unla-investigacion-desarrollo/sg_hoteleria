@@ -31,6 +31,11 @@
 									<div class="form-group">
 										<div class="form-line">
 											<form:input type="text" path="descripcion" id="descripcion" class="form-control" />
+											 <c:if test="${param.error != null}">
+											<div class="alert alert-danger" role= "alert">
+											<p>ERROR: Description.</p>
+												</div>
+											</c:if>
 											<div class="has-error">
 												<form:errors path="descripcion" class="help-inline" />
 											</div>

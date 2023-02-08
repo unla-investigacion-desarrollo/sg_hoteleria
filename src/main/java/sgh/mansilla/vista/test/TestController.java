@@ -147,8 +147,8 @@ public class TestController {
 		// Recorro todas las habitaciones
 
 
-		model.addAttribute("vista", ocupaciones);
-		model.addAttribute("fechas", fechasString);
+		model.addAttribute("view", ocupaciones);
+		model.addAttribute("dates", fechasString);
 		model.addAttribute("loggedinuser", getPrincipal());
 
 		return "/test";

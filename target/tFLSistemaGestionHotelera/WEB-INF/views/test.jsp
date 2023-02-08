@@ -109,24 +109,24 @@
 			        },
 			        responsive: true,
 			    	retrieve: true,
-					"language" : {
-						"sProcessing" : "Procesando...",
-						"sLengthMenu" : "Mostrar _MENU_ registros",
-						"sZeroRecords" : "No se encontraron resultados",
-						"sEmptyTable" : "Ningún dato disponible en esta tabla",
-						"sInfo" : "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-						"sInfoEmpty" : "Mostrando un total de 0 habitaciones",
-						"sInfoFiltered" : "(filtrado de un total de _MAX_ registros)",
+			    	"language" : {
+						"sProcessing" : "Processing...",
+						"sLengthMenu" : "Show _MENU_ records",
+						"sZeroRecords" : "No results found",
+						"sEmptyTable" : "No data available in this table.",
+						"sInfo" : "Showing records of the _START_ to _END_ of a total of _TOTAL_ records",
+						"sInfoEmpty" : "Showing a total of 0 rooms",
+						"sInfoFiltered" : "(filtering of a total of _MAX_ records)",
 						"sInfoPostFix" : "",
-						"sSearch" : "Buscar:",
+						"sSearch" : "Search:",
 						"sUrl" : "",
 						"sInfoThousands" : ",",
-						"sLoadingRecords" : "Cargando...",
+						"sLoadingRecords" : "Loading...",
 						"oPaginate" : {
-							"sFirst" : "Primero",
-							"sLast" : "Último",
-							"sNext" : "Siguiente",
-							"sPrevious" : "Anterior"
+							"sFirst" : "First",
+							"sLast" : "Last",
+							"sNext" : "Next",
+							"sPrevious" : "Previous"
 						}
 					}
 				});
@@ -135,7 +135,7 @@
 					var codigo = $('td', this).eq(0).text();
 
 					var nombre = $('td', this).eq(1).text();
-					alert('Código del cliente ' + codigo + ' ' + 'Nombre ' + nombre);
+					alert('Customer code ' + codigo + ' ' + 'Name ' + nombre);
 
 				});
 
@@ -159,7 +159,7 @@
 		$("#desde").attr("value", generarStringFecha(desde));
 		$("#hasta").attr("value", generarStringFecha(hasta));
 
-		dibujarTabla(document.getElementById("desde").value, document.getElementById("hasta").value);
+		dibujarTabla(document.getElementById("from").value, document.getElementById("to").value);
 
 	});
 

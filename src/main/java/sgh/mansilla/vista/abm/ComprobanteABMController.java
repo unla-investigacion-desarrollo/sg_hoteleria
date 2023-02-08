@@ -150,7 +150,7 @@ public class ComprobanteABMController extends AbstractABMController<Integer, Com
 					entity.setVencimientoCae(rpf.getFechaVtoCae().getTime());
 					//File file = GenerarPdf(entity);
 					//EnviarMail(entity.getClienteComprobante().getMail(),file);
-					model.addAttribute("facturado", "El comprobante fue emitido correctamente");
+					model.addAttribute("facturado", "The voucher was issued correctly.");
 				}else{
 					model.addAttribute("observacionesComprobante", rpf.getListaObservaciones());
 					model.addAttribute("erroresComprobante", rpf.getListaErrores());
@@ -163,10 +163,10 @@ public class ComprobanteABMController extends AbstractABMController<Integer, Com
 			if(entity.getNroComprobante() != 0){
 				model.addAttribute("nroComprobante", entity.getNroComprobante());
 			}
-			model.addAttribute("success", "La creaci&oacuten se realiz&oacute correctamente.");
+			model.addAttribute("success", "The creation was successful.");
 			
 		} catch(Exception e) {
-			model.addAttribute("success", "La creaci&oacuten no pudo realizarse.");
+			model.addAttribute("errorMsg", "The creation could not be realized.");
 		}
 		model.addAttribute("loggedinuser", getPrincipal());
 		return "redirect:list";
@@ -181,7 +181,7 @@ public class ComprobanteABMController extends AbstractABMController<Integer, Com
 		model.addAttribute("entity", entity);
 		model.addAttribute("edit", true);
 		model.addAttribute("loggedinuser", getPrincipal());
-		model.addAttribute("titulo", "Editar Comprobante");
+		model.addAttribute("titulo", "Edit Voucher");
 		return viewBaseLocation + "/form";
 	}
 
@@ -196,9 +196,9 @@ public class ComprobanteABMController extends AbstractABMController<Integer, Com
 			}
 
 			
-			model.addAttribute("success", "La modificaci&oacuten se realiz&oacute correctamente.");
+			model.addAttribute("success", "The modification was successful.");
 		} catch (Exception exception) {
-			model.addAttribute("success", "La modificaci&oacuten no pudo realizarse.");
+			model.addAttribute("errorMsg", "The modification could not be made.");
 		}
 		
 		Iterator<Concepto> i = entity.getConceptos().iterator();
@@ -462,7 +462,7 @@ public class ComprobanteABMController extends AbstractABMController<Integer, Com
 		RespuestaProcesarFactura rpf = new RespuestaProcesarFactura();
 		if(ticketAcceso == null){
 			List<String> listaErrores = new ArrayList<String>();
-			listaErrores.add("No se pudo obtener el ticket de acceso.");
+			listaErrores.add("The access ticket could not be obtained.");
 			rpf.setListaErrores(listaErrores);
 			return rpf;
 		}
@@ -591,11 +591,11 @@ public class ComprobanteABMController extends AbstractABMController<Integer, Com
             message.setRecipients(Message.RecipientType.TO,
                     InternetAddress.parse(to));
             // Set Subject: header field
-            message.setSubject("Comprobante de estadia");
+            message.setSubject("Proof of stay");
             // Create the message part
             BodyPart messageBodyPart = new MimeBodyPart();
             // Now set the actual message
-            messageBodyPart.setText("Se encuentra adjunto el comprobante de su estadia.");
+            messageBodyPart.setText("Attached you will find the voucher of your stay.");
             // Create a multipar message
             Multipart multipart = new MimeMultipart();
             // Set text message part

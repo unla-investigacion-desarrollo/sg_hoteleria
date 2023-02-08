@@ -99,8 +99,8 @@ public class PanelOcupacionController {
 
 					Estadia estadia = estadias.get(auxEstadia);
 
-					String informacion = "Estadia Nro: "+ estadia.getIdEstadia() +
-							" (Desde:" + estadia.getDiaCheckIn().toString()+", Hasta: " +
+					String informacion = "Stay Number: "+ estadia.getIdEstadia() +
+							" (From:" + estadia.getDiaCheckIn().toString()+", Until: " +
 							 estadia.getDiaCheckOut().toString() +")";
 					String color = estadia.getEstadoEstadia().getColor();
 					//Calendar desdeEstadia = Calendar.getInstance();
@@ -131,12 +131,12 @@ public class PanelOcupacionController {
 		// Recorro todas las habitaciones
 
 		SimpleDateFormat formatter = new SimpleDateFormat(FORMATO_CAMPO_FECHA);
-		model.addAttribute("desde", formatter.format(desde));
-		model.addAttribute("hasta", formatter.format(hasta));
+		model.addAttribute("from", formatter.format(desde));
+		model.addAttribute("until", formatter.format(hasta));
 
 
-		model.addAttribute("vista", ocupaciones);
-		model.addAttribute("fechas", fechasString);
+		model.addAttribute("view", ocupaciones);
+		model.addAttribute("dates", fechasString);
 		model.addAttribute("loggedinuser", getPrincipal());
 
 		return "/panelOcupacion";

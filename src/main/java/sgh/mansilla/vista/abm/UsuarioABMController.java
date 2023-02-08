@@ -65,7 +65,7 @@ public class UsuarioABMController {
 
 		List<User> users = userService.findAllUsers();
 
-		logger.info("Tengo {} usuarios registrados", users.size());
+		logger.info("I have {} registered users", users.size());
 
 		model.addAttribute("users", users);
 		model.addAttribute("loggedinuser", getPrincipal());
@@ -104,7 +104,7 @@ public class UsuarioABMController {
 
 		userService.saveUser(user);
 
-		model.addAttribute("success", "La creaci&oacuten se realiz&oacute correctamente.");
+		model.addAttribute("success", "The creation was successful.");
 		model.addAttribute("loggedinuser", getPrincipal());
 		// return "success";
 		return "redirect:usuarios";
@@ -135,7 +135,7 @@ public class UsuarioABMController {
 
 		userService.updateUser(user);
 
-		model.addAttribute("success", "La modificaci&oacuten se realiz&oacute correctamente.");
+		model.addAttribute("success", "The modification was successful.");
 		model.addAttribute("loggedinuser", getPrincipal());
 		return "redirect:usuarios";
 	}
@@ -147,10 +147,10 @@ public class UsuarioABMController {
 	public String deleteUser(@PathVariable String ssoId, ModelMap model) {
 		try{
 			userService.deleteUserBySSO(ssoId);
-			model.addAttribute("success", "La eliminaci&oacuten se realiz&oacute correctamente.");
+			model.addAttribute("success", "The elimination was successful.");
 		}
 		catch (Exception exception) {
-			model.addAttribute("success", "No se pudo completar la solicitud. Comuniquese con el administrador del sistema.");
+			model.addAttribute("errorMsg", "The application could not be completed. Please contact your system administrator.");
 		}
 		return "redirect:usuarios";
 	}
